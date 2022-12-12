@@ -41,4 +41,61 @@ class PostRepositoryImpTest {
         assertEquals("English", post.getTitle());
         assertEquals("Mastering the fundamentals of vowel sound", post.getBody());
     }
+
+    @Test
+    void deleteItem_countIsZero(){
+        Post post = new Post();
+        post.setTitle("Mathematics");
+        post.setBody("Polynomial concepts and advanced computing");
+        Post firstPost = postRepository.save(post);
+        assertEquals(post, postRepository.findById(firstPost.getId()));
+
+        Post secondPost = new Post();
+        secondPost.setTitle("Yoruba");
+        secondPost.setBody("Ami ohun ati ayooka oroo");
+        Post second = postRepository.save(secondPost);
+        assertEquals(secondPost, postRepository.findById(second.getId()));
+
+
+        Post thirdPost = new Post();
+        thirdPost.setTitle("football update");
+        thirdPost.setBody("Morocco to win world cup");
+        Post third = postRepository.save(thirdPost);
+        assertEquals(thirdPost, postRepository.findById(third.getId()));
+
+
+        Post fourthPost = new Post();
+        fourthPost.setTitle("Presidential election");
+        fourthPost.setBody("Peter Obi is going to be Nigeria next president argue with your keyboard");
+        Post fourth = postRepository.save(fourthPost);
+        assertEquals(fourthPost, postRepository.findById(fourth.getId()));
+
+
+        assertEquals(4L, postRepository.count());
+        postRepository.delete(post.getId());
+        assertEquals(3L, postRepository.count());
+        assertEquals(fourthPost, postRepository.findById(4));
+
+    }
+
+    @Test
+    void deleteByPost_countIsZeroTest(){
+        Post thirdPost = new Post();
+        thirdPost.setTitle("football update");
+        thirdPost.setBody("Morocco to win world cup");
+        Post third = postRepository.save(thirdPost);
+        assertEquals(thirdPost, postRepository.findById(third.getId()));
+
+
+        Post fourthPost = new Post();
+        fourthPost.setTitle("Presidential election");
+        fourthPost.setBody("Peter Obi is going to be Nigeria next president argue with your keyboard");
+        Post fourth = postRepository.save(fourthPost);
+        assertEquals(fourthPost, postRepository.findById(fourth.getId()));
+
+        postRepository.delete(thirdPost);
+        assertEquals(1L, postRepository.count());
+        postRepository.delete(fourthPost);
+        assertEquals(0L, postRepository.count());
+    }
 }

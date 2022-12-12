@@ -14,7 +14,7 @@ public class PostRepositoryImp implements PostRepository {
     public Post save(Post post) {
         if(post.getId() != 0) update(post);
         else{
-            post.setId(count++);
+            post.setId(++count);
             postDB.add(post);
         }
         return post;
@@ -39,8 +39,7 @@ public class PostRepositoryImp implements PostRepository {
 
     @Override
     public void delete(Post post) {
-        Post deletePost = postDB.stream().filter(posts -> posts.getPost() == post).findFirst().get();
-        postDB.remove(deletePost);
+        postDB.remove(post);
     }
 
     @Override
