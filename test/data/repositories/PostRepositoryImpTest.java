@@ -98,4 +98,21 @@ class PostRepositoryImpTest {
         postRepository.delete(fourthPost);
         assertEquals(0L, postRepository.count());
     }
+
+    @Test
+    void findEachPostById(){
+        Post firstPost = new Post();
+        firstPost.setTitle("football update");
+        firstPost.setBody("Morocco to win world cup");
+        Post first = postRepository.save(firstPost);
+        assertEquals(firstPost, postRepository.findById(first.getId()));
+
+
+        Post secondPost = new Post();
+        secondPost.setTitle("Presidential election");
+        secondPost.setBody("Peter Obi is going to be Nigeria next president argue with your keyboard");
+        Post second = postRepository.save(secondPost);
+        assertEquals(secondPost, postRepository.findById(second.getId()));
+
+    }
 }
