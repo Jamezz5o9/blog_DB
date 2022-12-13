@@ -43,7 +43,7 @@ class PostRepositoryImpTest {
     }
 
     @Test
-    void deleteItem_countIsZero(){
+    void deleteItem_countReducedAfterDeletion(){
         Post post = new Post();
         post.setTitle("Mathematics");
         post.setBody("Polynomial concepts and advanced computing");
