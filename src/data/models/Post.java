@@ -6,7 +6,7 @@ import java.util.List;
 public class Post {
     private int id;
     private String body;
-    private LocalDateTime date;
+    private LocalDateTime date = LocalDateTime.now();
     private String title;
     private List<Comment> post;
 
@@ -48,5 +48,17 @@ public class Post {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Post{");
+        sb.append("id=").append(id);
+        sb.append(", body='").append(body).append('\'');
+        sb.append(", date=").append(date);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", post=").append(post);
+        sb.append('}');
+        return sb.toString();
     }
 }
