@@ -1,15 +1,20 @@
 package africa.semicolon.ofofo.services;
 
+import africa.semicolon.ofofo.data.models.Comment;
 import africa.semicolon.ofofo.data.models.Post;
 import africa.semicolon.ofofo.data.repositories.PostRepository;
-import africa.semicolon.ofofo.data.repositories.PostRepositoryImp;
 import africa.semicolon.ofofo.dtos.requests.CreatePostRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
+@Service
 public class PostServiceImpl implements  PostService{
-
-   PostRepository postRepository = new PostRepositoryImp();
+   @Autowired
+   PostRepository postRepository;
     @Override
     public void createPost(CreatePostRequest createPostRequest) {
        Post post = new Post();
@@ -21,8 +26,8 @@ public class PostServiceImpl implements  PostService{
     @Override
     public void updatePost(CreatePostRequest createPostRequest) {
         Post post = new Post();
-        if(post.getId() != 0) {
-            Post savedPost = postRepository.findById(post.getId());
+        if(!Objects.equals(post.getId(), "")) {
+            Post savedPost = postRepository.findPostById(post.getId());
             savedPost.setBody(post.getBody());
             savedPost.setTitle(post.getTitle());
         }
@@ -30,17 +35,25 @@ public class PostServiceImpl implements  PostService{
     }
 
     @Override
-    public void deletePost(int id) {
-        postRepository.delete(id);
+    public void deletePost(String id) {
+        postRepository.deletePostById(id);
     }
 
     @Override
-    public Post viewPost(int id) {
-        return postRepository.findById(id);
+    public Post viewPost(String id) {
+        return postRepository.findPostById(id);
     }
 
     @Override
     public List<Post> viewAllPost() {
         return postRepository.findAll();
+    }
+
+    @Override
+    public void addComment(String postId, Comment comment) {
+       Post postSaved =  postRepository.findPostById(postId);
+       postSaved.getComments().add(comment);
+       postRepository.save(postSaved);
+
     }
 }

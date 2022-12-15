@@ -1,31 +1,15 @@
 package africa.semicolon.ofofo.data.models;
 
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Data
+@Document
 public class Comment {
     private String comment;
-    private int id;
+    @Id
+    private String id;
     private String commentName;
 
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCommentName() {
-        return commentName;
-    }
-
-    public void setCommentName(String commentName) {
-        this.commentName = commentName;
-    }
 }
