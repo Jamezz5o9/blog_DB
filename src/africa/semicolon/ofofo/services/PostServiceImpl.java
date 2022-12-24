@@ -54,6 +54,5 @@ public class PostServiceImpl implements  PostService{
        Post postSaved =  postRepository.findPostById(postId);
        postSaved.getComments().add(comment);
        postRepository.save(postSaved);
-
     }
 }

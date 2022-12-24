@@ -11,5 +11,4 @@ public class Comment {
     @Id
     private String id;
     private String commentName;
-
 }

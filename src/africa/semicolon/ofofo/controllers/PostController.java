@@ -27,4 +27,9 @@ public class PostController {
     public List<Post> viewAllPost(){
         return postService.viewAllPost();
     }
+
+    @GetMapping("/post/{postId}/{commentId}")
+    public Post viewPost(@PathVariable String postId, @PathVariable String commentId){
+        return postService.viewPost(postId);
+    }
 }

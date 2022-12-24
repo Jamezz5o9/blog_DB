@@ -7,10 +7,6 @@ import java.util.List;
 
 public interface CommentService {
     void createComment(CreateCommentRequest commentRequest);
-
     List<Comment> viewAll();
-
     Comment viewComment(String id);
-
-//    Comment viewCommentById(int id);
 }
